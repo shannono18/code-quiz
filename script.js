@@ -31,16 +31,14 @@ var currentQuestion = -1;
 var timeLeft = 0;
 var timer;
 
-//starts the countdown timer once user clicks the 'start' button
 function start() {
 
-    timeLeft = 75;
+    timeLeft = 60;
     document.getElementById("timeLeft").innerHTML = timeLeft;
 
     timer = setInterval(function() {
         timeLeft--;
         document.getElementById("timeLeft").innerHTML = timeLeft;
-        //proceed to end the game function when timer is below 0 at any time
         if (timeLeft <= 0) {
             clearInterval(timer);
             endGame(); 
@@ -50,12 +48,11 @@ function start() {
     next();
 }
 
-//stop the timer to end the game 
 function endGame() {
     clearInterval(timer);
 
     var quizContent = `
-    <h2>Game over!</h2>
+    <h2>Quiz over!</h2>
     <h3>You got a ` + score +  ` /100!</h3>
     <h3>That means you got ` + score / 20 +  ` questions correct!</h3>
     <input type="text" id="name" placeholder="First name"> 
@@ -64,13 +61,11 @@ function endGame() {
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//store the scores on local storage
 function setScore() {
     localStorage.setItem("highscore", score);
     localStorage.setItem("highscoreName",  document.getElementById('name').value);
     getScore();
 }
-
 
 function getScore() {
     var quizContent = `
@@ -89,11 +84,11 @@ function clearScore() {
     localStorage.setItem("highscore", "");
     localStorage.setItem("highscoreName",  "");
 
-    resetGame();
+    resetQuiz();
 }
 
 //reset the game 
-function resetGame() {
+function resetQuiz() {
     clearInterval(timer);
     score = 0;
     currentQuestion = -1;
@@ -107,31 +102,23 @@ function resetGame() {
         JavaScript Quiz!
     </h1>
     <h3>
-        Click to play!   
+        Click to Start the Quiz!   
     </h3>
     <button onclick="start()">Start!</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//deduct 15seconds from the timer if user chooses an incorrect answer
-function incorrect() {
-    timeLeft -= 15; 
-    next();
-}
-
-//increases the score by 20points if the user chooses the correct answer
 function correct() {
     score += 20;
     next();
 }
 
-//loops through the questions 
 function next() {
     currentQuestion++;
 
     if (currentQuestion > questions.length - 1) {
-        endGame();
+        endQuiz();
         return;
     }
 
