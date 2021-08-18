@@ -1,15 +1,15 @@
 var questions = [{
-        title: "Which of the following function of an array object adds one or more elements to the front of an array and returns the new length of the array?",
-        choices: ["unshift( )", "sort( )", "splice( )", "toString( )"],
-        answer: "unshift( )"
+        title: "Which of the following methods creates a new array where values are slighly different?",
+        choices: ["filter( )", "reduce( )", "map( )", "slice( )"],
+        answer: "map( )"
     },
     {
-        title: "Which built-in method adds one or more elements to the end of an array and returns the new length of the array?",
-        choices: ["last( )", "put( )", "push( )", "pop( )"],
-        answer: "push( )"
+        title: "Which method creates a new array by transforming every element in an array, individually?",
+        choices: ["filter( )", "put( )", "reduce( )", "map( )"],
+        answer: "reduce( )"
     },
     {
-        title: " Which built-in method returns the characters in a string beginning at the specified location?",
+        title: " Which method returns the characters in a string beginning at the specified location?",
         choices: ["substr( )", "getSubstring( )", "slice( )", "None of the above."],
         answer: "substr( )"
     },
@@ -25,7 +25,6 @@ var questions = [{
     }
 ]
 
-//setting the numerical variables for the functions.. scores and timers.. 
 var score = 0;
 var currentQuestion = -1;
 var timeLeft = 0;
@@ -55,7 +54,7 @@ function endGame() {
     <h2>Quiz over!</h2>
     <h3>You got a ` + score +  ` /100!</h3>
     <h3>That means you got ` + score / 20 +  ` questions correct!</h3>
-    <input type="text" id="name" placeholder="First name"> 
+    <input type="text" id="name" placeholder="Initials"> 
     <button onclick="setScore()">Set score!</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
@@ -79,15 +78,13 @@ function getScore() {
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//clears the score name and value in the local storage if the user selects 'clear score'
 function clearScore() {
     localStorage.setItem("highscore", "");
     localStorage.setItem("highscoreName",  "");
 
-    resetQuiz();
+    resetGame();
 }
 
-//reset the game 
 function resetQuiz() {
     clearInterval(timer);
     score = 0;
@@ -107,6 +104,11 @@ function resetQuiz() {
     <button onclick="start()">Start!</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
+}
+
+function incorrect() {
+    timeLeft -= 15; 
+    next();
 }
 
 function correct() {
