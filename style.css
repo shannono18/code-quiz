@@ -11,10 +11,10 @@
 
 #nav {
     display: block;
-    background-color: white;
+    background-color: khaki;
     display: inline-block;
     width: 98vw;
-    border: 3px solid #e64e79;
+    border: 3px solid black;
     border-radius: 5px;
     margin: 6px;
 }
