@@ -54,7 +54,7 @@ function endGame() {
     <h2>Quiz over!</h2>
     <h3>You got a ` + score +  ` /100!</h3>
     <h3>That means you got ` + score / 20 +  ` questions correct!</h3>
-    <input type="text" id="name" placeholder="Initials"> 
+    <input type="text" id="name" placeholder="Enter Your Initials"> 
     <button onclick="setScore()">Set score!</button>`;
 
     document.getElementById("quizBody").innerHTML = quizContent;
@@ -68,7 +68,7 @@ function setScore() {
 
 function getScore() {
     var quizContent = `
-    <h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+    <h2>` + localStorage.getItem("highscoreName") + ` your highscore is:</h2>
     <h1>` + localStorage.getItem("highscore") + `</h1><br> 
     
     <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>
@@ -85,7 +85,7 @@ function clearScore() {
     resetGame();
 }
 
-function resetQuiz() {
+function resetGame() {
     clearInterval(timer);
     score = 0;
     currentQuestion = -1;
@@ -120,7 +120,7 @@ function next() {
     currentQuestion++;
 
     if (currentQuestion > questions.length - 1) {
-        endQuiz();
+        endGame();
         return;
     }
 
@@ -140,3 +140,15 @@ function next() {
 
     document.getElementById("quizBody").innerHTML = quizContent;
 }
+
+    var highscores 
+
+    console.log("local storage");
+    for (i = 0; i < localStorage.length; i++)   {
+        console.log(localStorage.key(i) + "=[" + localStorage.getItem(localStorage.key(i)) + "]");
+    }
+
+    console.log("session storage");
+    for (i = 0; i < sessionStorage.length; i++) {
+        console.log(sessionStorage.key(i) + "=[" + sessionStorage.getItem(sessionStorage.key(i)) + "]");
+    }
